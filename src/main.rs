@@ -4,9 +4,9 @@ fn main() {
 
 
 fn find_prime(nth: usize) -> Option<u32> {
-    match nth < 1 || nth > 10001 {
-        true  => None,
-        false => _find_prime(nth - 1)}
+    match (1..=10001).contains(&nth) {
+        false => None,
+        true  => _find_prime(nth - 1)}
 }
 
 
