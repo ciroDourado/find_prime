@@ -1,5 +1,8 @@
+// this implementation takes up to aproximatelly
+// 3 seconds to calculate the 10001st prime
+
 fn main() {
-    let prime: usize = 1500;
+    let prime: usize = 10001;
 
     println!("nth({}) prime: {:?}", 
         prime, 
@@ -32,8 +35,16 @@ fn remainder_zero_divisions(number: &u32) -> usize {
 
 
 fn non_zero_remainders(number: &u32) -> usize {
-    let remainder_not_zero = move |dividend: &u32| {
-        (*number % dividend) != 0
-    };
-    (2.. *number).take_while(remainder_not_zero).count()
+    let (mut counter, mut dividend) = (0, 2);
+    
+    while remainder_not_zero(number, dividend) {
+        dividend += 1;
+        counter  += 1;
+    }
+    counter as usize
 } // end non_zero_remainders
+
+
+fn remainder_not_zero(num: &u32, div: u32) -> bool {
+    (*num % div) != 0
+} // end remainder_not_zero
